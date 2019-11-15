@@ -1,1 +1,1 @@
-gunicorn healthyApp:'create_app()'
+web: flask db upgrade; gunicorn healthyApp:'create_app()'
