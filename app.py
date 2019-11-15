@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 
 app = Flask(__name__)
@@ -8,5 +9,9 @@ def hello_world():
     return 'Hello JUNCTION!'
 
 
-if __name__ == '__main__':
-    app.run()
+def create_app():
+    app = Flask(__name__)
+    app.config.from_mapping(
+        SECRET_KEY=os.environ.get('SECRET_KEY') or 'dev_key'
+    )
+    return app
