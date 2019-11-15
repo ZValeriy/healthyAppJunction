@@ -4,14 +4,9 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/hello')
-def hello_world():
-    return 'Hello JUNCTION!'
-
-
-def create_app():
-    app = Flask(__name__)
-    app.config.from_mapping(
-        SECRET_KEY=os.environ.get('SECRET_KEY') or 'dev_key'
-    )
-    return app
+@app.route("/")
+def hello():
+    return "<h1 style='color:blue'>Hello There!</h1>"
+#
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0')
