@@ -39,7 +39,7 @@ def product_info_store():
             if exists_in_firebase(product_ean):
                 product = get_product_info(product_ean)
                 product_info = get_product_description_and_rating(product, user)
-                return product_info, 201
+                return json.dumps(product_info), 201
             else:
                 return {"ean": product_ean, "name": response["name"]}, 200
         else:
