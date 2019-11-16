@@ -77,3 +77,22 @@ def get_analogues(ean, user):
             "rating": analog_rating
         })
     return analogues
+
+
+def filter_by_parameter(parameter, products):
+    return list(filter(lambda analog: analog[parameter], products))
+
+
+def filter_analogues(analogues, user):
+    analog_products = [get_product_info(analog["ean"]) for analog in analogues]
+    filtered_analogues = analog_products
+    if user["gluten_free"]:
+        filtered_analogues = filter_by_parameter("glutenFree", filtered_analogues)
+    if user["lacto"]:
+        filtered_analogues = filter_by_parameter("lacto", filtered_analogues)
+    if user["sugar_free"]:
+        filtered_analogues = filter_by_parameter("sugarFree", filtered_analogues)
+    if user["vegan"]:
+        filtered_analogues = filter_by_parameter("vegan", filtered_analogues)
+    
+    return filter_analogues
