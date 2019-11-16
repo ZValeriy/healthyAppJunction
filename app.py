@@ -11,8 +11,9 @@ def hello():
 
 
 @app.route("/productInfo")
-def product_info(product_ean):
+def product_info():
     product_ean = request.args.get('ean')
+    print(json.dump({"ean": product_ean}))
     return json.dump({"ean": product_ean})
 
 
