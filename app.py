@@ -14,17 +14,19 @@ def hello():
 
 @app.route("/productInfo")
 def product_info_store():
-    product_ean = request.args.get('ean')
-    store_id = request.args.get('storeId')
+    if request.args.get('ean'):
+        product_ean = request.args.get('ean')
+
+    if request.args.get('storeId'):
+        store_id = request.args.get('storeId')
+    else:
+        store_id = 'N106'
 
     try:
         params = {
             "storeId": store_id,
             "ean": product_ean
         }
-
-        if params["store_id"] is None:
-            params["storeId"] = "N106"
 
         response = get_product_in_store(params)
         # If we found something
