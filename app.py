@@ -3,7 +3,7 @@ import json
 from flask import request
 from get_shops import get_shops
 from junc_API import get_product_in_store
-from firebase_api.main_firebase import exists_in_firebase, Product, get_product_info
+from firebase_api.main_firebase import exists_in_firebase, Product, get_product_info, get_analogues
 from acceptability_rating import get_product_description_and_rating
 
 app = Flask(__name__)
@@ -44,6 +44,7 @@ def product_info_store():
                 product_info = get_product_description_and_rating(product, user)
                 product_info["product"] = product
                 product_info["product_api"] = response
+                product_info["analogues"] = get_analogues(product_ean, user)
                 return product_info, 201
             else:
                 return {"ean": product_ean, "name": response["name"]}, 200
