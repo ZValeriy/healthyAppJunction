@@ -1,5 +1,5 @@
 def get_gluten(product, dude):
-    if dude["gluten_free"] and not product["gluten_free"]:
+    if dude["gluten_free"] and not product["glutenFree"]:
         return "Product include gluten, you shouldn`t eat it."
     return ''
 
@@ -14,7 +14,7 @@ def get_vegan(product, dude):
     return ''
 
 def get_sugar(product, dude):
-    if dude["sugar_free"] and not product["sugar_free"]:
+    if dude["sugar_free"] and not product["sugarFree"]:
         return "Product include sugar, you shouldn`t eat it."
     return ''
 
@@ -40,13 +40,13 @@ def get_general_product_info(product):
     elif float(product["fats"]) < 20:
         warning_message = "Product is quite good"
         rating = 4
-    
+
+    print(warning_message)
     return warning_message, rating
 
 
 def get_product_description_and_rating(product, dude):
     print("+++++++++++++++ЗАЛУПА+++++++++++++")
-    print(dude)
     print(product)
     rating = 0
     warning_message = {
