@@ -33,8 +33,7 @@ def product_info_store():
         response = get_product_in_store(params)
         # If we found something
         if response:
-            response_data = response.read()
-            return {"Code": "Success", "Message": response_data}, 201
+            return response, 201
         else:
             return {"Code": "Success", "Message": "We found nothing, good day, sir"}, 404
     except Exception as e:
