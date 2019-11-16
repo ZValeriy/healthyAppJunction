@@ -41,7 +41,7 @@ def product_info_store():
                 product_info = get_product_description_and_rating(product, user)
                 return product_info, 201
             else:
-                return {"ean": product_ean, "Name": response["name"]}, 200
+                return {"ean": product_ean, "name": response["name"]}, 200
         else:
             return {}, 202
     except Exception as e:
