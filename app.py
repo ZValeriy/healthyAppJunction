@@ -26,6 +26,8 @@ def product_info_store():
         store_id = 'N106'
 
     user = request.form.get("user")
+    print("=========ЗАЛУПА ПОЛЬЗОВАТЕЛЯ============")
+    print(user)
 
     try:
         params = {
