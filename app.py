@@ -1,6 +1,7 @@
 from flask import Flask
 import json
 from flask import request
+from get_shops import get_shops
 
 from junc_API import get_product_in_store
 
@@ -36,3 +37,10 @@ def product_info_store():
             return {"Code": "Success", "Message": "We found nothing, good day, sir"}, 404
     except Exception as e:
         return {"Code": "Error", "Message": e}, 404
+
+
+@app.route("/getShops")
+def get_shop_by_coord():
+    lon = request.args.get('lon')
+    lat = request.args.get('lan')
+    return json.dumps(get_shops(lon, lat))

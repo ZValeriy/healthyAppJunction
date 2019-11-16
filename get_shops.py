@@ -1,25 +1,26 @@
-from junc_API import get_shops_in_area, get_params_for_area, get_params_for_nearest
-from app import app
-from flask import request
+from junc_API import get_shops_in_area, get_params_for_nearest
 
 
-@app.route("/get_shops")
-def get():
-    lon = request.args.get('lon')
-    lat = request.args.get('lan')
-    # Trying to get shops around the area
+def get_needed_shop_attributes(response):
     try:
-        params = get_params_for_area(lon, lat)
+        shop_id = response['results'][0]['Id']
+        name = response['results'][0]['Name']
+        address = response['results'][0]['Address']
+        return {
+                    "id": str(shop_id),
+                    "name": str(name),
+                    "address": str(address)
+                }
+    except Exception as e:
+        return
+
+
+def get_shops(lon, lat):
+    try:
+        params = get_params_for_nearest(lon, lat)
         response = get_shops_in_area(params)
-        # If we found something
         if response:
-            return {"Code": "Success", "Message": response}, 201
-        # If we don`t found any shops around the area, then try to find nearest
-        else:
-            params = get_params_for_nearest(lon, lat)
-            response = get_shops_in_area(params)
-            return {"Code": "Success", "Message": response}, 201 if response \
-                else {"Code": "Success", "Message": "We found nothing, good day, sir"}, 201
+            shop_attrs = get_needed_shop_attributes(response)
+            return {"Code": "Success", "Message": shop_attrs}, 201
     except Exception as e:
         return {"Code": "Error", "Message": e}, 404
-
