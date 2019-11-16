@@ -1,6 +1,7 @@
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 import requests
 
+BASE_URL = 'https://kesko.azure-api.net'
 SUBSCRIPTION_KEY = "bc5bbda6683e4c7bab9b06827fece364"
 HEADERS = {
         'Content-Type': 'application/json',
@@ -9,7 +10,6 @@ HEADERS = {
 
 
 def get_shops_in_area(params):
-
     conn = http.client.HTTPSConnection('kesko.azure-api.net')
     conn.request("POST", "/v1/search/stores?%s" % params, "{body}", HEADERS)
     response = conn.getresponse()
@@ -44,8 +44,8 @@ def get_params_for_area(lon, lat):
 
 
 def get_product_in_store(params):
-    urlString = "/products/" + str(params["storeId"]) + "/" + str(params["ean"])
+    url_string = BASE_URL + "/products/" + str(params["storeId"]) + "/" + str(params["ean"])
 
-    r = requests.get('https://kesko.azure-api.net' + urlString, headers=HEADERS)
-
-    return r.json()
+    r = requests.get(url_string, headers=HEADERS)
+    response_json = r.json()
+    return response_json

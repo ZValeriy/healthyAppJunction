@@ -13,13 +13,6 @@ def hello():
 
 
 @app.route("/productInfo")
-def product_info():
-    product_ean = request.args.get('ean')
-    print(json.dumps({"ean": product_ean}))
-    return json.dumps({"ean": product_ean})
-
-
-@app.route("/productInfoStore")
 def product_info_store():
     product_ean = request.args.get('ean')
     store_id = request.args.get('storeId')
@@ -29,6 +22,9 @@ def product_info_store():
             "storeId": store_id,
             "ean": product_ean
         }
+
+        if params["store_id"] is None:
+            params["storeId"] = "N106"
 
         response = get_product_in_store(params)
         # If we found something
