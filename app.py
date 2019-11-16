@@ -16,7 +16,9 @@ def hello():
 
 @app.route("/productInfo", methods=["POST"])
 def product_info_store():
-
+    print(request)
+    print(request.form)
+    print(request.form.get("storeId"))
     if request.form.get("ean"):
         product_ean = request.form.get("ean")
 
