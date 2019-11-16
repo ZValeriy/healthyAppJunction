@@ -4,6 +4,7 @@ from flask import request
 from get_shops import get_shops
 from junc_API import get_product_in_store
 from firebase_api.main_firebase import exists_in_firebase, Product, get_product_info
+from acceptability_rating import get_product_description_and_rating
 
 app = Flask(__name__)
 
@@ -13,17 +14,19 @@ def hello():
     return "<h1 style='color:blue'>Hello There!</h1>"
 
 
-@app.route("/productInfo")
+@app.route("/productInfo", methods=["POST"])
 def product_info_store():
-    if request.args.get('ean'):
-        product_ean = request.args.get('ean')
+    request_data = request.form.get()
 
-    if request.args.get('storeId'):
-        store_id = request.args.get('storeId')
+    if request_data['ean']:
+        product_ean = request_data['ean']
+
+    if request_data['storeId']:
+        store_id = request_data['storeId']
     else:
         store_id = 'N106'
 
-    user = request.args.get('user')
+    user = request_data["user"]
 
     try:
         params = {
@@ -36,8 +39,8 @@ def product_info_store():
         if response:
             if exists_in_firebase(product_ean):
                 product = get_product_info(product_ean)
-                #Вызов функции проверки рейтинга и всякой такой штуки
-                return product, 201
+                product_info = get_product_description_and_rating(product, user)
+                return product_info, 201
             else:
                 return {"ean": product_ean, "Name": response["name"]}, 200
         else:

@@ -22,7 +22,7 @@ def get_allergic(product, dude):
         return "Product include " + ", ".join(allergic_ingredients) + ", you shouldn`t eat."
 
 def get_general_product_info(product):
-    warning_message = null
+    warning_message = None
     rating = 0
     if float(product["fats"]) > 30:
         warning_message = "Product not so healthy"
@@ -43,9 +43,9 @@ def get_product_description_and_rating(product, dude):
     rating = 0
     warning_message = {
         "gluten": get_gluten(product, dude),
-        "lacto": get_lacto(product, dude)
-        "vegan": get_vegan(product, dude)
-        "sugar": get_sugar(product, dude)
+        "lacto": get_lacto(product, dude),
+        "vegan": get_vegan(product, dude),
+        "sugar": get_sugar(product, dude),
         "allergic": get_allergic(product, dude)
     }
 
