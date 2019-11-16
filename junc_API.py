@@ -1,7 +1,8 @@
 import http.client, urllib.request, urllib.parse, urllib.error, base64
+import sys
+import app
 
-
-SUBSCRIPTION_KEY = "86a9672226254ee4949deedbe3d46492"
+SUBSCRIPTION_KEY = "bc5bbda6683e4c7bab9b06827fece364"
 
 
 def get_shops_in_area(params):
@@ -50,7 +51,10 @@ def get_product_in_store(params):
     }
 
     conn = http.client.HTTPSConnection('kesko.azure-api.net')
-    conn.request("GET", "/products/{storeId}/{ean}?%s" % params, "{body}", headers)
+    urlString = "/products/"+str(params["storeId"]) + "/" + str(params["ean"])
+
+    conn.request("GET", urlString, headers)
+
     response = conn.getresponse()
     conn.close()
     return response
