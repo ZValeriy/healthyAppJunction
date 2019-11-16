@@ -45,6 +45,9 @@ def get_general_product_info(product):
 
 
 def get_product_description_and_rating(product, dude):
+    print("+++++++++++++++ЗАЛУПА+++++++++++++")
+    print(dude)
+    print(product)
     rating = 0
     warning_message = {
         "gluten": get_gluten(product, dude),
