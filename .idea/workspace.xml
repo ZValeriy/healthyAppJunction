@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="75e89188-5804-43b7-958e-75bbbb6e5623" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/junc_API.py" beforeDir="false" afterPath="$PROJECT_DIR$/junc_API.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +47,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -90,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1573844791341</updated>
       <workItem from="1573844792441" duration="320000" />
-      <workItem from="1573845485024" duration="12686000" />
+      <workItem from="1573845485024" duration="12893000" />
     </task>
     <task id="LOCAL-00001" summary="HELLO JUNC COMMIT">
       <created>1573846248208</created>
