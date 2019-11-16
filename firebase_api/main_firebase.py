@@ -54,13 +54,11 @@ class Product:
 def exists_in_firebase(ean):
     product = db.child("products").child(ean).get()
     if product.val() is None:
-        print("NOO")
         return False
     else:
-        print("YAP")
         return True
 
 
 def get_product_info(ean):
     product = db.child("products").child(ean).get()
-    return product.val()
+    return dict(product.val())

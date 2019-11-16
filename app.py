@@ -36,11 +36,12 @@ def product_info_store():
         response = get_product_in_store(params)
         # If we found something
         if response:
+            print(product_ean)
             if exists_in_firebase(product_ean):
                 product = get_product_info(product_ean)
                 print(product)
                 product_info = get_product_description_and_rating(product, user)
-                return json.dumps(product_info), 201
+                return product_info, 201
             else:
                 return {"ean": product_ean, "name": response["name"]}, 200
         else:
