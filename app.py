@@ -42,7 +42,7 @@ def product_info_store():
                 product = get_product_info(product_ean)
                 print(product)
                 product_info = get_product_description_and_rating(product, user)
-                print(product_info)
+                product_info["product"] = product
                 return product_info, 201
             else:
                 return {"ean": product_ean, "name": response["name"]}, 200
