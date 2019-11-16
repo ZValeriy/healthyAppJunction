@@ -3,20 +3,24 @@ def get_gluten(product, dude):
         return "Product include gluten, you shouldn`t eat it."
     return ''
 
+
 def get_lacto(product, dude):
     if dude["lacto"] and product["lacto"]:
         return "Product include lactose, you shouldn`t eat it."
     return ''
+
 
 def get_vegan(product, dude):
     if dude["vegan"] and not product["vegan"]:
         return "Product isn`t vegan, you shouldn`t eat it."
     return ''
 
+
 def get_sugar(product, dude):
     if dude["sugar_free"] and not product["sugarFree"]:
         return "Product include sugar, you shouldn`t eat it."
     return ''
+
 
 def get_allergic(product, dude):
     allergic_ingredients = list(set(dude["ingredients"]).intersection(set(product["ingredients"])))
@@ -26,6 +30,7 @@ def get_allergic(product, dude):
         return "Product include " + ", ".join(allergic_ingredients) + ", you shouldn`t eat."
     return ''
 
+
 def get_general_product_info(product):
     warning_message = ''
     rating = 0
@@ -33,7 +38,7 @@ def get_general_product_info(product):
         warning_message = "Product not so healthy"
         rating = 2
 
-    elif float(product["fats"]) > 20 and float(product["fats"]) < 30:
+    elif 20 < float(product["fats"]) < 30:
         warning_message = "Product is normal"
         rating = 3
 
@@ -46,17 +51,13 @@ def get_general_product_info(product):
 
 
 def get_product_description_and_rating(product, dude):
-    print("+++++++++++++++ЗАЛУПА+++++++++++++")
-    print(product)
-    print(dude)
-
     rating = 0
     warning_message = {
         "gluten": get_gluten(product, dude),
         "lacto": get_lacto(product, dude),
         "vegan": get_vegan(product, dude),
         "sugar": get_sugar(product, dude),
-        "allergic": get_allergic(product, dude)
+        "allergic": get_allergic(product, dude),
     }
 
     for key in warning_message.keys():
@@ -71,5 +72,5 @@ def get_product_description_and_rating(product, dude):
 
     if not rating:
         warning_message["general"], rating = get_general_product_info(product)
-    
+
     return {"rating": rating, "warning_message": warning_message}

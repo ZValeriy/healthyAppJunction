@@ -4,9 +4,9 @@ import json
 BASE_URL = 'https://kesko.azure-api.net'
 SUBSCRIPTION_KEY = "bc5bbda6683e4c7bab9b06827fece364"
 HEADERS = {
-        'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY,
-    }
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY,
+}
 
 
 def get_shops_in_area(params):
@@ -21,15 +21,15 @@ def get_shops_in_area(params):
 
 def get_params_for_nearest(lon, lat):
     return json.dumps({"filters": {
-                            "sortOrders": {
-                                "name": "distance",
-                                "location": {
-                                    "lon": float(lon),
-                                    "lat": float(lat)
-                                }
-                            }
-                        }
-                    })
+        "locationDistance": {
+            "name": "distance",
+            "location": {
+                "lon": float(lon),
+                "lat": float(lat)
+            }
+        }
+    }
+    })
 
 
 def get_product_in_store(params):

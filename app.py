@@ -25,7 +25,6 @@ def product_info_store():
         store_id = 'N106'
 
     user = request.form.get("user")
-    print("=========ЗАЛУПА ПОЛЬЗОВАТЕЛЯ============")
     user = json.loads(user)
 
     try:
@@ -46,6 +45,7 @@ def product_info_store():
                 product_info["product_api"] = response
                 product_info["analogues"] = get_analogues(product_ean, user)
                 product_info["filtered_analogues"] = filter_analogues(product_info["analogues"], user)
+                product_info["package_info"] = "Don't forget to throw garbage in special containers"
                 return product_info, 201
             else:
                 return {"ean": product_ean, "name": response["name"]}, 200
@@ -68,7 +68,6 @@ def add_product():
 
 @app.route("/getShops")
 def get_shop_by_coord():
-
     try:
         lon = float(request.args.get('lon'))
         lat = float(request.args.get('lan'))
