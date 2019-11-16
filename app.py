@@ -2,8 +2,8 @@ from flask import Flask
 import json
 from flask import request
 from get_shops import get_shops
-
 from junc_API import get_product_in_store
+from firebase_api.main_firebase import exists_in_firebase, Product
 
 app = Flask(__name__)
 
@@ -32,11 +32,25 @@ def product_info_store():
         response = get_product_in_store(params)
         # If we found something
         if response:
-            return response, 201
-        else:
-            return {"Code": "Success", "Message": "We found nothing, good day, sir"}, 404
+            if exists_in_firebase(product_ean):
+                product = get_product_info(product_ean)
+                return product, 201
+            else:
+                return {"ean": product_ean, "Name": response["name"]}, 200
     except Exception as e:
         return {"Code": "Error", "Message": e}, 404
+
+
+@app.route("/addProduct")
+def add_product():
+    product = request.args.get('ingredients')
+    new_product = Product(product["ingredients"], product["gluten_free"], product["vegan"],
+                          product["package_type"], product["healthy"], product["ean"],
+                          product["fats"], product["carbs"], product["proteins"], product["calories"],
+                          product["name"], product["lacto"], product["sugar_free"])
+    new_product.add_to_firebase()
+    get_product_info(product_ean)
+    return product, 201
 
 
 @app.route("/getShops")

@@ -10,7 +10,6 @@ HEADERS = {
     }
 
 
-
 def get_shops_in_area(params):
     headers = {
         'Content-Type': 'raw',
@@ -40,4 +39,3 @@ def get_product_in_store(params):
     r = requests.get(url_string, headers=HEADERS)
     response_json = r.json()
     return response_json
-    
