@@ -1,5 +1,4 @@
 import pyrebase
-import json
 
 config = {
     "apiKey": "AIzaSyBjqAye_l6TLF-7XnIZFLMJaqI86CgdAVQ",
@@ -61,5 +60,9 @@ def exists_in_firebase(ean):
         print("YAP")
         return True
 
+
+def get_product_info(ean):
+    product = db.child("products").child(ean).get()
+    return product.val()
 
 exists_in_firebase(9711248272)
