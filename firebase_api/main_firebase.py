@@ -64,5 +64,3 @@ def exists_in_firebase(ean):
 def get_product_info(ean):
     product = db.child("products").child(ean).get()
     return product.val()
-
-exists_in_firebase(9711248272)
