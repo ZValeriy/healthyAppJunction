@@ -1,6 +1,5 @@
 import http.client, urllib.request, urllib.parse, urllib.error, base64
-import sys
-import app
+import requests
 
 SUBSCRIPTION_KEY = "bc5bbda6683e4c7bab9b06827fece364"
 
@@ -45,16 +44,14 @@ def get_params_for_area(lon, lat):
 
 
 def get_product_in_store(params):
+    urlString = "/products/" + str(params["storeId"]) + "/" + str(params["ean"])
+
+
     headers = {
         'Content-Type': 'application/json',
         'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY,
     }
 
-    conn = http.client.HTTPSConnection('kesko.azure-api.net')
-    urlString = "/products/"+str(params["storeId"]) + "/" + str(params["ean"])
+    r = requests.get('https://kesko.azure-api.net' + urlString, headers=headers)
 
-    conn.request("GET", urlString, headers)
-
-    response = conn.getresponse()
-    conn.close()
-    return response
+    return r.json()
