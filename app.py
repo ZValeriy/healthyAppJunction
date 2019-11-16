@@ -41,6 +41,10 @@ def product_info_store():
 
 @app.route("/getShops")
 def get_shop_by_coord():
-    lon = request.args.get('lon')
-    lat = request.args.get('lan')
+
+    try:
+        lon = float(request.args.get('lon'))
+        lat = float(request.args.get('lan'))
+    except ValueError:
+        return json.dumps({"Code": "Error", "Message": "Wrong coord type"})
     return json.dumps(get_shops(lon, lat))
