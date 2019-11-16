@@ -19,7 +19,7 @@ def get_sugar(product, dude):
     return ''
 
 def get_allergic(product, dude):
-    allergic_ingredients = list(set(dude["allergic_ingredients"]).intersection(set(product["ingredients"])))
+    allergic_ingredients = list(set(dude["ingredients"]).intersection(set(product["ingredients"])))
     if len(allergic_ingredients) > 2:
         allergic_ingredients = allergic_ingredients[:2]
     if len(allergic_ingredients) > 0:
@@ -48,6 +48,8 @@ def get_general_product_info(product):
 def get_product_description_and_rating(product, dude):
     print("+++++++++++++++ЗАЛУПА+++++++++++++")
     print(product)
+    print(dude)
+
     rating = 0
     warning_message = {
         "gluten": get_gluten(product, dude),
