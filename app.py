@@ -16,17 +16,16 @@ def hello():
 
 @app.route("/productInfo", methods=["POST"])
 def product_info_store():
-    request_data = request.form.get()
 
-    if request_data['ean']:
-        product_ean = request_data['ean']
+    if request.form.get("ean"):
+        product_ean = request.form.get("ean")
 
-    if request_data['storeId']:
-        store_id = request_data['storeId']
+    if request.form.get("storeId"):
+        store_id = request.form.get("storeId")
     else:
         store_id = 'N106'
 
-    user = request_data["user"]
+    user = request.form.get("user")
 
     try:
         params = {
