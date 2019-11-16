@@ -41,3 +41,16 @@ def get_params_for_area(lon, lat):
             "distance": 5
         }
     })
+
+
+def get_product_in_store(params):
+    headers = {
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY,
+    }
+
+    conn = http.client.HTTPSConnection('kesko.azure-api.net')
+    conn.request("GET", "/products/{storeId}/{ean}?%s" % params, "{body}", headers)
+    response = conn.getresponse()
+    conn.close()
+    return response
