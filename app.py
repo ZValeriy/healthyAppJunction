@@ -1,5 +1,6 @@
-import os
 from flask import Flask
+import json
+from flask import request
 
 app = Flask(__name__)
 
@@ -9,14 +10,17 @@ def hello():
     return "<h1 style='color:blue'>Hello There!</h1>"
 
 
-@app.route("/productInfo/<int:product_ean>")
+@app.route("/productInfo")
 def product_info(product_ean):
-    return "Info about product"
+    product_ean = request.args.get('ean')
+    return json.dump({"ean": product_ean})
 
 
-@app.route("/productInfoStore/<int:product_ean>/<float:lon>/<float:lat>")
-def product_info_store(product_ean, lon, lat):
-    print("PRODUCT EAN: " + str(product_ean))
-    print("LON: "+str(lon) + " LAT: "+ str(lat))
-    return "GET INFO ABOUT PRODUCT IN STORE"
+@app.route("/productInfoStore")
+def product_info_store():
+    product_ean = request.args.get('ean')
+    longitude = request.args.get('lon')
+    latitude = request.args.get('lan')
+
+    return json.dump({"ean": product_ean, "lon": longitude, "lan": latitude})
 
