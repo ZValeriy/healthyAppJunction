@@ -1,4 +1,5 @@
 import pyrebase
+from acceptability_rating import get_product_description_and_rating
 
 config = {
     "apiKey": "AIzaSyBjqAye_l6TLF-7XnIZFLMJaqI86CgdAVQ",
@@ -62,3 +63,17 @@ def exists_in_firebase(ean):
 def get_product_info(ean):
     product = db.child("products").child(ean).get()
     return dict(product.val())
+
+
+def get_analogues(ean, user):
+    product = get_product_info(ean)
+    analogues = []
+    for analog in product["analogues"]:
+        analog_product = get_product_info(analog)
+        analog_rating = get_product_description_and_rating(analog_product, user)["rating"]
+        analogues.append({
+            "ean": analog,
+            "name": analog_product["name"],
+            "rating": analog_rating
+        })
+    return analogues
