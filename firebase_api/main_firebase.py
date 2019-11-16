@@ -95,4 +95,4 @@ def filter_analogues(analogues, user):
     if user["vegan"]:
         filtered_analogues = filter_by_parameter("vegan", filtered_analogues)
     
-    return filter_analogues
+    return filtered_analogues
