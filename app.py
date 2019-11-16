@@ -27,7 +27,7 @@ def product_info_store():
     user = request.form.get("user")
     print("=========ЗАЛУПА ПОЛЬЗОВАТЕЛЯ============")
     user = json.loads(user)
-    print(user)
+    print(user["vegan"])
 
     try:
         params = {
